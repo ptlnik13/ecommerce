@@ -9,6 +9,9 @@ import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
 import './App.css';
 
 class App extends React.Component {
+    unsubscribeFromAuth = null;
+    unsubscribeFromSnapshot = null;
+
     constructor(props) {
         super(props);
 
@@ -18,15 +21,12 @@ class App extends React.Component {
 
     }
 
-    unsubscribeFromAuth = null;
-
     componentDidMount() {
         this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
             if (userAuth) {
                 const userRef = await createUserProfileDocument(userAuth);
 
-                userRef.onSnapshot(snapShot => {
-                    // console.log(snapShot.data());
+                this.unsubscribeFromSnapshot = userRef.onSnapshot(snapShot => {
                     this.setState({
                         currentUser: {
                             id: snapShot.id,
@@ -42,6 +42,7 @@ class App extends React.Component {
 
     componentWillUnmount() {
         this.unsubscribeFromAuth();
+        this.unsubscribeFromSnapshot();
     }
 
     render() {
