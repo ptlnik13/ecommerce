@@ -53,7 +53,7 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = ({user}) => ({
+const mapStateToProps = ({user}) => ({ // you are removing state here, compare with header.component.jsx file.
     currentUser: user.currentUser
 })
 const mapDispatchToProps = dispatch => ({
