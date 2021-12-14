@@ -6,6 +6,7 @@ import './checkoutpage.styles.scss';
 import {createStructuredSelector} from "reselect";
 import {selectCartItems, selectCartTotal} from "../../redux/cart/cart.selectors";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
 
 const CheckoutPage = ({cartItems, total}) => {
     return (
@@ -21,6 +22,11 @@ const CheckoutPage = ({cartItems, total}) => {
                 cartItems.map(cartItem => <CheckoutItem key={cartItem.id} cartItem={cartItem}/>)
             }
             <span className="total">Total: $ {total}</span>
+            <div className="test-warning">
+                *Please use the following <a className='test-card' href="https://stripe.com/docs/testing#cards" target={'_blank'} rel="noreferrer">Test Credit Card</a> for Payments* <br/>
+                
+            </div>
+            <StripeCheckoutButton price={total}/>
         </div>
     );
 };
