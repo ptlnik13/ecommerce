@@ -1,33 +1,32 @@
 import React from 'react';
 
 import {connect} from "react-redux";
-
-import './checkoutpage.styles.scss';
 import {createStructuredSelector} from "reselect";
 import {selectCartItems, selectCartTotal} from "../../redux/cart/cart.selectors";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
+import {CheckoutHeaderContainer, CheckoutPageContainer, HeaderBlockContainer, TestCard, TotalContainer, WarningContainer} from "./checkout.styles";
 
 const CheckoutPage = ({cartItems, total}) => {
     return (
-        <div className='checkout-page'>
-            <div className="checkout-header">
-                <div className="header-block"><span>Product</span></div>
-                <div className="header-block"><span>Description</span></div>
-                <div className="header-block"><span>Quantity</span></div>
-                <div className="header-block"><span>Price</span></div>
-                <div className="header-block"><span>Remove</span></div>
-            </div>
+        <CheckoutPageContainer>
+            <CheckoutHeaderContainer>
+                <HeaderBlockContainer><span>Product</span></HeaderBlockContainer>
+                <HeaderBlockContainer><span>Description</span></HeaderBlockContainer>
+                <HeaderBlockContainer><span>Quantity</span></HeaderBlockContainer>
+                <HeaderBlockContainer><span>Price</span></HeaderBlockContainer>
+                <HeaderBlockContainer><span>Remove</span></HeaderBlockContainer>
+            </CheckoutHeaderContainer>
             {
                 cartItems.map(cartItem => <CheckoutItem key={cartItem.id} cartItem={cartItem}/>)
             }
-            <span className="total">Total: $ {total}</span>
-            <div className="test-warning">
-                *Please use the following <a className='test-card' href="https://stripe.com/docs/testing#cards" target={'_blank'} rel="noreferrer">Test Credit Card</a> for Payments* <br/>
-                
-            </div>
+            <TotalContainer>Total: $ {total}</TotalContainer>
+            <WarningContainer>
+                *Please use the following <TestCard href="https://stripe.com/docs/testing#cards" target={'_blank'} rel="noreferrer">Test Credit Card</TestCard> for Payments* <br/>
+
+            </WarningContainer>
             <StripeCheckoutButton price={total}/>
-        </div>
+        </CheckoutPageContainer>
     );
 };
 const mapStateToProps = createStructuredSelector({
