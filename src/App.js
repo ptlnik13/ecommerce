@@ -9,7 +9,7 @@ import Header from "./components/header/header.component";
 
 import {Redirect, Route, Switch} from "react-router-dom";
 
-import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
+import {/*addCollectionAndDocuments*/ auth, createUserProfileDocument} from "./firebase/firebase.utils";
 
 import {connect} from "react-redux";
 
@@ -20,12 +20,14 @@ import {createStructuredSelector} from "reselect";
 
 import './App.css';
 
+/*import {selectCollectionsForPreview} from "./redux/shop/shop.selector";*/
+
 class App extends React.Component {
     unsubscribeFromAuth = null;
     unsubscribeFromSnapshot = null;
 
     componentDidMount() {
-        const {setCurrentUser} = this.props;
+        const {setCurrentUser, /*collectionsArray*/} = this.props;
         this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
                 if (userAuth) {
                     const userRef = await createUserProfileDocument(userAuth);
@@ -39,6 +41,7 @@ class App extends React.Component {
                     )
                 } else {
                     setCurrentUser(userAuth);
+                    /*await addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items}))); // map is for removing routeName and all others property*/
                 }
             }
         )
@@ -65,7 +68,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({ // you are removing state here, compare with header.component.jsx file.
-    currentUser: selectCurrentUser
+    currentUser: selectCurrentUser,
+    /* collectionsArray: selectCollectionsForPreview // this is for passing SHOP_DATA into firestore function (addCollectionAndDocuments) */
 })
 const mapDispatchToProps = dispatch => ({
     setCurrentUser: user => dispatch(setCurrentUser(user))
