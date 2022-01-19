@@ -9,11 +9,11 @@ export const selectCollections = createSelector(
 )
 
 export const selectCollectionsForPreview = createSelector(
-    [selectShop],
-    shop => Object.values(shop.collections)
-)
+    [selectCollections],
+    collection => collection ? Object.values(collection) : []
+);
 
 export const selectCollection = memoize(collectionUrlParam => createSelector(
     [selectCollections],
-    collections => collections[collectionUrlParam]
+    collections => collections ? collections[collectionUrlParam] : null
 ))

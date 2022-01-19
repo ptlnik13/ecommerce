@@ -2,18 +2,16 @@ import React from 'react';
 import CollectionItem from "../../components/collection-item/collection-item.component";
 import {connect} from "react-redux";
 import {selectCollection} from "../../redux/shop/shop.selector";
-import {CollectionPageContainer, CollectionTitle} from "./collection.styles";
-import {CollectionItemContainer} from "../../components/collection-item/collection-item.styles";
+import {CollectionPageContainer, CollectionTitle, CollectionItemsContainer} from "./collection.styles";
 
 const CollectionPage = ({collection}) => {
-    console.log(collection);
     const {title, items} = collection;
     return (
         <CollectionPageContainer>
             <CollectionTitle>{title}</CollectionTitle>
-            <CollectionItemContainer>{
+            <CollectionItemsContainer>{
                 items.map(item => <CollectionItem key={item.id} item={item}/>)
-            }</CollectionItemContainer>
+            }</CollectionItemsContainer>
         </CollectionPageContainer>
     );
 };
