@@ -16,6 +16,7 @@ import {selectCurrentUser} from "./redux/user/user.selector";
 import {createStructuredSelector} from "reselect";
 
 import './App.css';
+import {checkUserSession} from "./redux/user/user.action";
 
 /*import {selectCollectionsForPreview} from "./redux/shop/shop.selector";*/
 
@@ -24,6 +25,8 @@ class App extends React.Component {
     unsubscribeFromSnapshot = null;
 
     componentDidMount() {
+        const {checkUserSession} = this.props;
+        checkUserSession();
     }
 
     componentWillUnmount() {
@@ -51,4 +54,7 @@ const mapStateToProps = createStructuredSelector({ // you are removing state her
     currentUser: selectCurrentUser,
 })
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+    checkUserSession: () => dispatch(checkUserSession())
+})
+export default connect(mapStateToProps, mapDispatchToProps)(App);
