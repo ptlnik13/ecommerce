@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
@@ -18,36 +18,21 @@ import {createStructuredSelector} from "reselect";
 import './App.css';
 import {checkUserSession} from "./redux/user/user.action";
 
-/*import {selectCollectionsForPreview} from "./redux/shop/shop.selector";*/
-
-class App extends React.Component {
-    unsubscribeFromAuth = null;
-    unsubscribeFromSnapshot = null;
-
-    componentDidMount() {
-        const {checkUserSession} = this.props;
+const App = ({checkUserSession, currentUser}) => {
+    useEffect(() => {
         checkUserSession();
-    }
-
-    componentWillUnmount() {
-        this.unsubscribeFromAuth();
-        this.unsubscribeFromSnapshot();
-    }
-
-    render() {
-        const {currentUser} = this.props;
-        return (
-            <div>
-                <Header/>
-                <Switch>
-                    <Route exact path='/' component={HomePage}/>
-                    <Route path='/shop' component={ShopPage}/>
-                    <Route exact path='/checkout' component={CheckoutPage}/>
-                    <Route exact path='/signin' render={() => currentUser ? (<Redirect to='/'/>) : (<SignInAndSignUpPage/>)}/>
-                </Switch>
-            </div>
-        );
-    }
+    }, [checkUserSession])
+    return (
+        <div>
+            <Header/>
+            <Switch>
+                <Route exact path='/' component={HomePage}/>
+                <Route path='/shop' component={ShopPage}/>
+                <Route exact path='/checkout' component={CheckoutPage}/>
+                <Route exact path='/signin' render={() => currentUser ? (<Redirect to='/'/>) : (<SignInAndSignUpPage/>)}/>
+            </Switch>
+        </div>
+    );
 }
 
 const mapStateToProps = createStructuredSelector({ // you are removing state here, compare with header.component.jsx file.

@@ -17,7 +17,7 @@ const CollectionPage = ({collection}) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-    // console.log(ownProps); // well you can write any name this property we get from its own component.(since "CollectionPage" has rendered in "shop" component's route, so we get route props.
+    // console.log(ownProps); // well you can write any name this property we get from its own component.(since "CollectionPage" has rendered in "shop" component's route, so we get route props.)
     return ({
         collection: selectCollection(ownProps.match.params.collectionId)(state)
     })
