@@ -1,0 +1,37 @@
+.checkout-item {
+  align-items: center;
+  border-bottom: 1px solid darkgrey;
+  display: flex;
+  font-size: 20px;
+  min-height: 100px;
+  padding: 15px 0;
+  width: 100%;
+}
+.checkout-item .image-container {
+  padding-right: 15px;
+  width: 23%;
+}
+.checkout-item .image-container img {
+  height: 100%;
+  width: 100%;
+}
+.checkout-item .name,
+.checkout-item .quantity,
+.checkout-item .price {
+  width: 23%;
+}
+.checkout-item .quantity {
+  display: flex;
+}
+.checkout-item .quantity .arrow {
+  cursor: pointer;
+}
+.checkout-item .quantity .value {
+  margin: 0 10px;
+}
+.checkout-item .remove-button {
+  cursor: pointer;
+  padding-left: 12px;
+}
+
+/*# sourceMappingURL=checkout-item.styles.css.map */

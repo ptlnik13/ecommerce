@@ -1,0 +1,22 @@
+.cart-item {
+  display: flex;
+  height: 80px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+.cart-item img {
+  width: 30%;
+}
+.cart-item .item-details {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 20px;
+  width: 70%;
+}
+.cart-item .item-details .name {
+  font-size: 16px;
+}
+
+/*# sourceMappingURL=cart-item.styles.css.map */
