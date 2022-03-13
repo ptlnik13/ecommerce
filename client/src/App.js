@@ -4,11 +4,10 @@ import Header from "./components/header/header.component";
 import {Redirect, Route, Switch} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import {selectCurrentUser} from "./redux/user/user.selector";
-import './App.css';
 import {checkUserSession} from "./redux/user/user.action";
 import Spinner from "./components/spinner/spinner.component";
 import ErrorBoundry from "./components/error-boundry/error-boundry.component";
-
+import {GlobalStyle} from "./global.styles";
 
 const HomePage = lazy(() => import('./pages/homepage/homepage.component'));
 const ShopPage = lazy(() => import("./pages/shop/shop.component"));
@@ -24,6 +23,7 @@ const App = () => {
     }, [dispatch])
     return (
         <div>
+            <GlobalStyle/>
             <Header/>
             <Switch>
                 <ErrorBoundry>
